@@ -4,7 +4,58 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Shawshank Redemption</title>
   </head>
-  <body></body>
+  <body>
+    <div id="app">
+  
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      const app = createApp({
+        data() {
+          return {
+            newCharacterName: "",
+            newCharacterRole: "",
+            characterList: [
+              { name: "Andy Dufresne", role: "Main Character" },
+              { name: "Ellis Boyd Redding", role: "Narrator" },
+              { name: "Warden Norton", role: "Antagonist" },
+              { name: "Tommy Williams", role: "Supporting Character" },
+              { name: "Samuel Norton", role: "Antagonist" },
+            ],
+            favouriteCharacterList: [],
+          }
+        },
+        computed: {
+          favouriteCharacterCount() {
+            return this.favouriteCharacterList.length;
+          }
+        },
+        methods: {
+          toggleFavouriteCharacter(characterName) {
+            if (this.favouriteCharacterList.includes(characterName)) {
+              this.favouriteCharacterList = this.favouriteCharacterList.filter(
+                (name) => name !== characterName
+              );
+            } else {
+              this.favouriteCharacterList.push(characterName);
+            }
+          },
+          addCharacter() {
+            this.characterList.push({
+              name: this.newCharacterName,
+              role: this.newCharacterRole,
+            });
+            this.newCharacterName = "";
+            this.newCharacterRole = "";
+          },
+        }
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
 </html>

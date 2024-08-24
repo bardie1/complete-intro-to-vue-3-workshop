@@ -19,6 +19,18 @@
           </ul>
         </li>
       </ul>
+
+      <hr>
+      <h1>Counter</h1>
+      <p>{{ count }}</p>
+      <label for="jumpAmount">Jump By</label>
+      <input 
+        type="number"
+        id="jumpAmount"
+        v-bind:value="jumpAmount"
+        v-on:input="handleJumpAmountChange"/>
+      <button v-on:click="increment">Increment</button>
+      <button v-on:click="decrement">Decrement</button>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -28,6 +40,8 @@
       const app = createApp({
         data() {
           return {
+            jumpAmount: 1,
+            count: 0,
             message: 'Hello it works',
             listOfNumbers: [
               {
@@ -56,6 +70,17 @@
                 list: [1, 2, 3]
               }
             ]
+          }
+        },
+        methods: {
+          increment() {
+            this.count += this.jumpAmount
+          },
+          decrement() {
+            this.count -= this.jumpAmount
+          },
+          handleJumpAmountChange(event) {
+            this.jumpAmount = parseInt(event.target.value)
           }
         }
       })
